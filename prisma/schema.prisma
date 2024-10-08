@@ -1,0 +1,101 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String @id @unique
+  email        String
+  firstName    String
+  lastName     String
+  profileImage String
+
+  orders Order[]
+
+  createdAt DateTime @default(now())
+}
+
+model Product {
+  id          String        @id @default(uuid())
+  name        String
+  description String
+  status      ProductStatus
+  price       Int
+  images      String[]
+  category    Category
+  isFeatured  Boolean       @default(false)
+  brandId String
+  brand Brand @relation(fields: [brandId], references: [id])
+
+//   type      String
+  skuCount  Int      @default(0)
+  gender    Gender   @default(men)
+  size      String?
+  sku       String?   @unique
+  updatedAt DateTime @updatedAt
+
+
+  createdAt DateTime @default(now())
+}
+
+model Banner {
+  id          String @id @default(uuid())
+  title       String
+  description String?
+  imageString String
+  url         String?
+
+  createdAt DateTime @default(now())
+}
+
+model Order {
+  id     String @id @default(uuid())
+  status String @default("pending")
+  amount Int
+  method OrderType @default(DELIVERY)
+
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String?
+
+  createdAt DateTime @default(now())
+}
+
+model Brand {
+    id String @id @default(uuid())
+    name String
+    products Product[]
+    logo String
+    createdAt DateTime @default(now())
+}
+
+enum ProductStatus {
+  draft
+  published
+  archived
+}
+
+enum Category {
+  men
+  women
+  kids
+}
+
+enum Gender {
+    men
+    women
+}
+
+enum OrderType {
+    PICKUP
+    DELIVERY
+}
