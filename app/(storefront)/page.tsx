@@ -11,7 +11,6 @@ export default function IndexPage() {
   return (
     <div>
       <Hero />
-      {/* <Slider /> */}
       <Brands />
       <FeaturedProducts />
       <NewArrivals />

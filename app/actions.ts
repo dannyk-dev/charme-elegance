@@ -175,6 +175,7 @@ export async function createBanner(prevState: any, formData: FormData) {
     },
   });
 
+  revalidatePath("/", "page");
   redirect("/dashboard/banner");
 }
 
