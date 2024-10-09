@@ -78,6 +78,15 @@ model Brand {
     createdAt DateTime @default(now())
 }
 
+model BrandSettings {
+    id String @id @default(uuid())
+    logo_header String
+    logo_footer String
+    primary_color String?
+    foreground_color String?
+    accent_color String?
+}
+
 enum ProductStatus {
   draft
   published

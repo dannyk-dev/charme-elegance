@@ -24,7 +24,7 @@ async function TopNavbar() {
           <div className="flex items-center  md:gap-x-4">
             <TopNavbarLinks />
 
-            {user && user.email === "kruger.dkk@gmail.com" ? (
+            {user && user.email === process.env.ADMIN_USER_EMAIL ? (
               <Button
                 asChild
                 className="justify-end ml-auto hidden lg:flex "

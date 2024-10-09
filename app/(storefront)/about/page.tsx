@@ -3,7 +3,7 @@ import React from "react";
 
 type Props = {};
 
-function AboutUsPage({}: Props) {
+async function AboutUsPage({}: Props) {
   return (
     <div>
       <BreadCrumbs />

@@ -22,6 +22,14 @@ const links = [
     name: "Banner Picture",
     href: "/dashboard/banner",
   },
+  {
+    name: "Website Content",
+    href: "/dashboard/cms",
+  },
+  {
+    name: "Site Settings",
+    href: "/dashboard/settings",
+  },
 ];
 
 export function DashboardNavigation() {

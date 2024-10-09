@@ -20,7 +20,7 @@ function FooterCard({}: Props) {
           <h2 className="text-lg font-bold tracking-tight ">Our Collection:</h2>
           <p className="tracking-wide">
             Indulge in captivating scents that leave a lasting impression,
-            whether you're looking for a bold, masculine fragrance or a
+            whether you&#39;re looking for a bold, masculine fragrance or a
             delicate, feminine scent. Each perfume is designed to elevate your
             senses and complement your unique style.
           </p>

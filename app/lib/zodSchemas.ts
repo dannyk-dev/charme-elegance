@@ -27,3 +27,18 @@ export const brandSchema = z.object({
     .min(1, "At least 1 image is required")
     .max(1, "Only 1 image is needed"),
 });
+
+export const brandSettingsSchema = z.object({
+  // name
+  logo_header: z
+    .array(z.string())
+    .min(1, "At least 1 image is required")
+    .max(1, "Only 1 image is needed"),
+  logo_footer: z
+    .array(z.string())
+    .min(1, "At least 1 image is required")
+    .max(1, "Only 1 image is needed"),
+  primary_color: z.string().optional(),
+  foreground_color: z.string().optional(),
+  accent_color: z.string().optional(),
+});

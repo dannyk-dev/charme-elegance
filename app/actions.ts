@@ -11,6 +11,7 @@ import { revalidatePath } from "next/cache";
 import { stripe } from "./lib/stripe";
 import Stripe from "stripe";
 import slugify from "slugify";
+import { KindeUser } from "@kinde-oss/kinde-auth-nextjs/types";
 
 async function getNextSkuCount(): Promise<number> {
   const lastProduct = await prisma.product.findFirst({
@@ -32,13 +33,17 @@ function getInitials(str: string): string {
     .join("");
 }
 
-export async function createProduct(prevState: unknown, formData: FormData) {
+export async function adminGuard() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
-  if (!user || user.email !== "kruger.dkk@gmail.com") {
+  if (!user || user.email !== process.env.ADMIN_USER_EMAIL) {
     return redirect("/");
   }
+}
+
+export async function createProduct(prevState: unknown, formData: FormData) {
+  await adminGuard();
 
   const submission = parseWithZod(formData, {
     schema: productSchema,
@@ -90,12 +95,7 @@ export async function createProduct(prevState: unknown, formData: FormData) {
 }
 
 export async function editProduct(prevState: any, formData: FormData) {
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
-
-  if (!user || user.email !== "kruger.dkk@gmail.com") {
-    return redirect("/");
-  }
+  await adminGuard();
 
   const submission = parseWithZod(formData, {
     schema: productSchema,
@@ -134,12 +134,7 @@ export async function editProduct(prevState: any, formData: FormData) {
 }
 
 export async function deleteProduct(formData: FormData) {
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
-
-  if (!user || user.email !== "kruger.dkk@gmail.com") {
-    return redirect("/");
-  }
+  await adminGuard();
 
   await prisma.product.delete({
     where: {
@@ -151,12 +146,7 @@ export async function deleteProduct(formData: FormData) {
 }
 
 export async function createBanner(prevState: any, formData: FormData) {
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
-
-  if (!user || user.email !== "kruger.dkk@gmail.com") {
-    return redirect("/");
-  }
+  await adminGuard();
 
   const submission = parseWithZod(formData, {
     schema: bannerSchema,
@@ -180,12 +170,7 @@ export async function createBanner(prevState: any, formData: FormData) {
 }
 
 export async function deleteBanner(formData: FormData) {
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
-
-  if (!user || user.email !== "kruger.dkk@gmail.com") {
-    return redirect("/");
-  }
+  await adminGuard();
 
   await prisma.banner.delete({
     where: {
@@ -526,12 +511,7 @@ export async function checkOut(deliveryMethod: "PICKUP" | "DELIVERY") {
 }
 
 export async function createBrand(prevState: unknown, formData: FormData) {
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
-
-  if (!user || user.email !== "kruger.dkk@gmail.com") {
-    return redirect("/");
-  }
+  await adminGuard();
 
   const submission = parseWithZod(formData, {
     schema: brandSchema,
@@ -552,12 +532,7 @@ export async function createBrand(prevState: unknown, formData: FormData) {
 }
 
 export async function editBrand(prevState: any, formData: FormData) {
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
-
-  if (!user || user.email !== "kruger.dkk@gmail.com") {
-    return redirect("/");
-  }
+  await adminGuard();
 
   const submission = parseWithZod(formData, {
     schema: brandSchema,
@@ -582,12 +557,7 @@ export async function editBrand(prevState: any, formData: FormData) {
 }
 
 export async function deleteBrand(formData: FormData) {
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
-
-  if (!user || user.email !== "kruger.dkk@gmail.com") {
-    return redirect("/");
-  }
+  await adminGuard();
 
   await prisma.brand.delete({
     where: {

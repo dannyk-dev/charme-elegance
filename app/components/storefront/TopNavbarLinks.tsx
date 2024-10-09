@@ -19,7 +19,7 @@ const topBarLinks = [
   {
     id: 2,
     name: "About Us",
-    href: "/about-us",
+    href: "/about",
   },
   {
     id: 3,

@@ -1,6 +1,7 @@
 import prisma from "@/app/lib/db";
 import { redis } from "@/app/lib/redis";
 import { stripe } from "@/app/lib/stripe";
+import { OrderType } from "@prisma/client";
 import { headers } from "next/headers";
 
 export async function POST(req: Request) {
@@ -30,7 +31,7 @@ export async function POST(req: Request) {
           amount: session.amount_total as number,
           status: session.status as string,
           userId: session.metadata?.userId,
-          method: session.metadata?.deliveryMethod,
+          method: session.metadata?.deliveryMethod as OrderType,
         },
       });
 
