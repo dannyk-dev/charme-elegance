@@ -1,5 +1,4 @@
 import React from "react";
-// import React from 'react'
 import Link from "next/link";
 import { NavbarLinks } from "./NavbarLinks";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
@@ -19,7 +18,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-// import { Heart } from "@phosphor-icons/react";
 
 export async function Navbar() {
   const { getUser } = getKindeServerSession();

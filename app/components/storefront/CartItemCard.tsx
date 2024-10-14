@@ -1,7 +1,6 @@
-import { addToWishlist, delItem } from "@/app/actions";
+import { delItem } from "@/app/actions";
 import { CartItem } from "@/app/lib/interfaces";
 import { Button } from "@/components/ui/button";
-import { Heart } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
@@ -28,17 +27,13 @@ export default function CartItemCard({ item }: CartItemCardProps) {
         <div className="flex flex-col h-full space-y-6 w-full justify-between">
           <div className="flex items-center gap-x-2 w-full">
             <div className="flex flex-col">
-              {/* <p className="text-muted text-sm">{item.brand.name}</p> */}
               <Button
                 asChild
                 variant="link"
                 size="sm"
                 className="text-sm text-gray-500 p-0 text-left justify-start"
               >
-                <Link
-                  href={`/products/${item?.brand?.name || ""}`}
-                  // className="text-sm text-gray-400"
-                >
+                <Link href={`/products/${item?.brand?.name || ""}`}>
                   {item?.brand?.name || ""}
                 </Link>
               </Button>
@@ -72,5 +67,3 @@ export default function CartItemCard({ item }: CartItemCardProps) {
     </div>
   );
 }
-
-// export default CartItem

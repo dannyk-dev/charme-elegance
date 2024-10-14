@@ -60,9 +60,7 @@ export default async function ProductIdRoute({
 }: {
   params: { id: string };
 }) {
-  // noStore();
   const data = await getData(params.id);
-  // let toast = null;
   const { getUser } = getKindeServerSession();
   const user = await getUser();
   const productInCart = await checkProductInCart(user?.id ?? null, params.id);
@@ -85,17 +83,8 @@ export default async function ProductIdRoute({
             {data.name}
           </h1>
           <p className="text-sm text-gray-500 ">sku: {data.sku}</p>
-          {/* <div className="mt-3 flex items-center gap-1">
-            <StarIcon className="h-4 w-4 text-yellow-500 fill-yellow-500" />
-            <StarIcon className="h-4 w-4 text-yellow-500 fill-yellow-500" />
-            <StarIcon className="h-4 w-4 text-yellow-500 fill-yellow-500" />
-            <StarIcon className="h-4 w-4 text-yellow-500 fill-yellow-500" />
-            <StarIcon className="h-4 w-4 text-yellow-500 fill-yellow-500" />
-          </div> */}
           <p className="text-lg text-gray-700 my-6">{data.description}</p>
-
           <p className="text-2xl mt-2 text-gray-900">${data.price}</p>
-
           {data?.size && (
             <p className="text-sm mt-2 text-gray-600">Size: {data?.size}</p>
           )}
@@ -106,7 +95,6 @@ export default async function ProductIdRoute({
             cartItem={productInCart}
             isSingleItem={false}
             noUserDisable={false}
-            // inCart={productInCart}
           />
         </div>
       </div>
@@ -114,9 +102,6 @@ export default async function ProductIdRoute({
       <div className="mt-16">
         <FeaturedProducts />
       </div>
-      {/* <AddToCartNotification /> */}
-
-      {/* {toast ? <AddToCartNotification {...toast} /> : null} */}
     </>
   );
 }
